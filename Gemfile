@@ -10,6 +10,9 @@ gem 'puma', '~> 3.0'
 # MongoDB ORM, replacement for ActiveRecord
 gem 'mongoid', '~> 6.0.0'
 
+# Declarative model serialization
+gem 'active_model_serializers', '~> 0.10.0'
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
 
