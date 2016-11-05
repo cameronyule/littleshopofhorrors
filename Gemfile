@@ -25,6 +25,10 @@ gem 'mongoid', '~> 6.0.0'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+
+  # Rails' fixtures are provided by ActiveRecord, which we aren't using.
+  # Use factory_girl as a replacement for fixtures.
+  gem 'factory_girl_rails', '~> 4.7.0'
 end
 
 group :development do
