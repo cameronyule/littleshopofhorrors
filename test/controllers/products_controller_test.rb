@@ -10,6 +10,25 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should return expect json format" do
+    get products_url, as: :json
+
+    products = JSON.parse @response.body
+
+    assert_equal @product.name, products.first["name"]
+    assert_equal @product.description, products.first["description"]
+    assert_equal @product.price, products.first["price"]
+  end
+
+  test "should return id as a string" do
+    get products_url, as: :json
+
+    products = JSON.parse @response.body
+
+    assert_equal "application/json", @response.content_type
+    assert_kind_of String, products.first["id"]
+  end
+
   test "should create product" do
     @product = build(:product)
     assert_difference('Product.count') do
