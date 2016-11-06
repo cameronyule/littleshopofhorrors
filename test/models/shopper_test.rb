@@ -20,4 +20,12 @@ class ShopperTest < ActiveSupport::TestCase
     assert_not_empty s.errors.details[:email]
   end
 
+  test "should require a unique email address" do
+    s1 = create(:shopper)
+    s2 = build(:shopper)
+
+    assert_not s2.valid?
+    assert_not_empty s2.errors.details[:email]
+  end
+
 end

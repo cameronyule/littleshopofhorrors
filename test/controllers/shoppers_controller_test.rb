@@ -1,9 +1,6 @@
 require 'test_helper'
 
 class ShoppersControllerTest < ActionDispatch::IntegrationTest
-  setup do
-    @shopper = create(:shopper)
-  end
 
   test "routes should be defined" do
     assert_routing "/api/shoppers/1",
@@ -41,11 +38,13 @@ class ShoppersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should show shopper" do
+    @shopper = create(:shopper)
     get shopper_url(@shopper), as: :json
     assert_response :success
   end
 
   test "should update shopper" do
+    @shopper = create(:shopper)
     patch shopper_url(@shopper), params: {
       shopper: {
         email: @shopper.email,
@@ -56,6 +55,7 @@ class ShoppersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy shopper" do
+    @shopper = create(:shopper)
     assert_difference('Shopper.count', -1) do
       delete shopper_url(@shopper), as: :json
     end

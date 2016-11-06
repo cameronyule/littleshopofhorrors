@@ -6,6 +6,7 @@ class Shopper
   has_many :orders
 
   validates :name, :email, presence: true
+  validates :email, uniqueness: true
 
   after_initialize :init_basket
 
