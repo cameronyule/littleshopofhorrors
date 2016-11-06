@@ -17,10 +17,8 @@ class ShoppersControllerTest < ActionDispatch::IntegrationTest
 
     assert_difference('Shopper.count') do
       post shoppers_url, params: {
-        shopper: {
-          email: @shopper.email,
-          name: @shopper.name
-        }
+        email: @shopper.email,
+        name: @shopper.name
       }, as: :json
     end
     assert_response :created
@@ -30,10 +28,8 @@ class ShoppersControllerTest < ActionDispatch::IntegrationTest
     @shopper = build(:shopper)
 
     post shoppers_url, params: {
-      shopper: {
-        email: @shopper.email,
-        name: @shopper.name
-      }
+      email: @shopper.email,
+      name: @shopper.name
     }, as: :json
 
     shopper_json = JSON.parse(@response.body)

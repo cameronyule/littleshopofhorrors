@@ -39,6 +39,6 @@ class ShoppersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def shopper_params
-      params.require(:shopper).permit(:name, :email)
+      params.permit(:name, :email)
     end
 end
