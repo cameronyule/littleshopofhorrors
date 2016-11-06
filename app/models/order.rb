@@ -6,14 +6,10 @@ class Order
   embeds_many :line_items
 
   def populate_from_basket(basket)
-    # Create a line item for each unique product in the basket
-    # Increase the line item quantity for duplicate products
     grouped_items = basket.items.group_by{|i| i.product.id.to_s }
     grouped_items.each do |group|
-      items = group.last
-      item = items.first
-      product = item.product
-      line_item = LineItem.create_from_product(product, items.count)
+      key, items = group
+      line_item = LineItem.create_from_product(items.first.product, items.count)
       line_items << line_item
     end
 
