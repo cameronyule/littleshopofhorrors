@@ -1,21 +1,23 @@
 class BasketsController < ApplicationController
   before_action :set_shopper, only: [:show, :update, :destroy]
 
-  # GET /basket
+  # GET /api/shoppers/:id/basket
   def show
     render json: @shopper.basket
   end
 
-  # PATCH/PUT /basket
+  # PATCH/PUT /api/shoppers/:id/basket
   def update
-    if @shopper.basket.update(basket_params)
+    @shopper.basket.product_ids = params[:product_ids]
+
+    if @shopper.save
       render json: @shopper.basket
     else
       render json: @shopper.basket.errors, status: :unprocessable_entity
     end
   end
 
-  # DELETE /basket
+  # DELETE /api/shoppers/:id/basket
   def destroy
     @shopper.basket.destroy
   end
@@ -26,8 +28,4 @@ class BasketsController < ApplicationController
       @shopper = Shopper.find(params[:shopper_id])
     end
 
-    # Only allow a trusted parameter "white list" through.
-    def basket_params
-      params.fetch(:basket, {})
-    end
 end
