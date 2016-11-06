@@ -5,6 +5,13 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     @product = create(:product)
   end
 
+  test "routes should be defined" do
+    assert_routing "/api/products/1",
+      controller: "products",
+      action: "show",
+      id: "1"
+  end
+
   test "should get index" do
     get products_url, as: :json
     assert_response :success
