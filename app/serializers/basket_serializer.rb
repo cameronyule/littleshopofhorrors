@@ -1,3 +1,3 @@
 class BasketSerializer < ActiveModel::Serializer
-  attributes :id, :products
+  attributes :id, :items
 end

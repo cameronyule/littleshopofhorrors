@@ -8,7 +8,7 @@ class BasketsController < ApplicationController
 
   # PATCH/PUT /api/shoppers/:id/basket
   def update
-    @shopper.basket.product_ids = params[:product_ids]
+    @shopper.basket.update_items(params[:product_ids])
 
     if @shopper.save
       render json: @shopper.basket
@@ -19,7 +19,7 @@ class BasketsController < ApplicationController
 
   # DELETE /api/shoppers/:id/basket
   def destroy
-    @shopper.basket.products.clear
+    @shopper.basket.items.clear
   end
 
   private

@@ -7,18 +7,16 @@ class Order
   def self.create_from_basket(basket)
     order = self.new
 
-    byebug
-
     # Create a line item for each unique product in the basket
     # Increase the line item quantity for duplicate products
-    grouped_products = basket.products.group_by{|p| p.id.to_s }
-    grouped_products.each do |group|
-      products = group.last
-      line_item = LineItem.create_from_product(products.first, products.count)
+    grouped_items = basket.items.group_by{|i| i.product.id.to_s }
+    grouped_items.each do |group|
+      items = group.last
+      item = items.first
+      product = item.product
+      line_item = LineItem.create_from_product(product, items.count)
       order.line_items << line_item
     end
-
-    byebug
 
     order
   end

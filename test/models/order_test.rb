@@ -13,9 +13,9 @@ class OrderTest < ActiveSupport::TestCase
 
   test "should only create line items for unique products" do
     basket = build(:basket)
-    product1 = build(:product)
-    product2 = build(:product)
-    basket.products = [product1, product1, product2]
+    item1 = build(:basket_item, product: create(:product))
+    item2 = build(:basket_item, product: create(:product))
+    basket.items = [item1, item1, item2]
 
     order = Order.create_from_basket(basket)
 

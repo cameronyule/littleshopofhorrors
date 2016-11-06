@@ -2,17 +2,17 @@ require 'test_helper'
 
 class BasketTest < ActiveSupport::TestCase
 
-  test "should contain an empty products array after initialisation" do
+  test "should contain an empty items array after initialisation" do
     basket = build(:basket)
-    assert_empty basket.products
+    assert_empty basket.items
   end
 
-  test "should calculate the total price of products contained" do
+  test "should accept basketitems" do
     basket = build(:basket)
-    basket.products << build(:product, price: 100)
-    basket.products << build(:product, price: 200)
-    basket.products << build(:product, price: 300)
-    assert_equal 600, basket.total
+    basket.items << build(:basket_item)
+    basket.items << build(:basket_item)
+    basket.items << build(:basket_item)
+    assert_equal 3, basket.items.size
   end
 
 end

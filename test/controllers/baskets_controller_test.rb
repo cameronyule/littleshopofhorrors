@@ -3,7 +3,6 @@ require 'test_helper'
 class BasketsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @shopper = create(:shopper)
-    @products = [create(:product), create(:product)]
   end
 
   test "routes should be defined" do
@@ -21,18 +20,20 @@ class BasketsControllerTest < ActionDispatch::IntegrationTest
     basket = Basket.new(basket_json)
 
     assert_equal @shopper.basket.id.to_s, basket.id.to_s
-    assert_equal @shopper.basket.products.count, basket.products.count
+    assert_equal @shopper.basket.items.count, basket.items.count
   end
 
   test "should update basket" do
+    products = [create(:product), create(:product)]
+
     patch shopper_basket_url shopper_id: @shopper.id.to_s, params: {
-      product_ids: @products.map{|p| p.id.to_s}
+      product_ids: products.map{|p| p.id.to_s}
     }, as: :json
 
     @shopper.basket.reload
 
     assert_response :ok
-    assert_equal 2, @shopper.basket.products.count
+    assert_equal 2, @shopper.basket.items.count
   end
 
   test "should empty basket products" do
@@ -41,6 +42,6 @@ class BasketsControllerTest < ActionDispatch::IntegrationTest
 
     @shopper.reload
 
-    assert_empty @shopper.basket.products
+    assert_empty @shopper.basket.items
   end
 end

@@ -1,9 +1,15 @@
 class Basket
   include Mongoid::Document
   embedded_in :shopper
-  has_and_belongs_to_many :products, inverse_of: nil
+  embeds_many :items, :class_name => "BasketItem"
 
-  def total
-    products.reduce(0) {|acc, p| acc += p.price }
+  def update_items(product_ids)
+    items.clear
+    product_ids.each do |id|
+      item = BasketItem.new
+      item.product = Product.find(id)
+      items << item
+    end
+    items
   end
 end
