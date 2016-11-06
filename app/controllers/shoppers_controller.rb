@@ -13,7 +13,7 @@ class ShoppersController < ApplicationController
     if @shopper.save
       render json: @shopper, status: :created, location: @shopper
     else
-      render json: @shopper.errors, status: :unprocessable_entity
+      render json: {errors: @shopper.errors}, status: :unprocessable_entity
     end
   end
 
@@ -22,7 +22,7 @@ class ShoppersController < ApplicationController
     if @shopper.update(shopper_params)
       render json: @shopper
     else
-      render json: @shopper.errors, status: :unprocessable_entity
+      render json: {errors: @shopper.errors}, status: :unprocessable_entity
     end
   end
 

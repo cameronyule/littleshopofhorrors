@@ -7,7 +7,12 @@ class CheckoutController < ApplicationController
     order = @shopper.orders.create
     order.populate_from_basket(@shopper.basket)
 
-    render json: order, status: :created
+    if order.save
+      @shopper.basket.empty_items
+      render json: order, status: :created
+    else
+      render json: {errors: order.errors}, status: :unprocessable_entity
+    end
   end
 
   private
