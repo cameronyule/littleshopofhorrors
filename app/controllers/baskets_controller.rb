@@ -19,7 +19,7 @@ class BasketsController < ApplicationController
 
   # DELETE /api/shoppers/:id/basket
   def destroy
-    @shopper.basket.destroy
+    @shopper.basket.products.clear
   end
 
   private

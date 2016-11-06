@@ -34,12 +34,12 @@ class BasketsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 2, @shopper.basket.products.count
   end
 
-  test "should destroy basket" do
+  test "should empty basket products" do
     delete shopper_basket_url shopper_id: @shopper.id.to_s, as: :json
     assert_response 204
 
     @shopper.reload
 
-    assert_nil @shopper.basket
+    assert_empty @shopper.basket.products
   end
 end
