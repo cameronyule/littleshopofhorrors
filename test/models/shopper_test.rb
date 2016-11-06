@@ -8,4 +8,16 @@ class ShopperTest < ActiveSupport::TestCase
     assert_not_nil s.basket
   end
 
+  test "should require a name" do
+    s = Shopper.new email: "test@example.org"
+    assert_not s.valid?
+    assert_not_empty s.errors.details[:name]
+  end
+
+  test "should require an email address" do
+    s = Shopper.new name: "cameron"
+    assert_not s.valid?
+    assert_not_empty s.errors.details[:email]
+  end
+
 end

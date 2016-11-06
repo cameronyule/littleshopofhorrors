@@ -5,6 +5,8 @@ class Shopper
   embeds_one :basket
   has_many :orders
 
+  validates :name, :email, presence: true
+
   after_initialize :init_basket
 
   def init_basket
