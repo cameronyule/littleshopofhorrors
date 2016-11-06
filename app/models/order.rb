@@ -1,12 +1,11 @@
 class Order
   include Mongoid::Document
+  include Mongoid::Attributes::Dynamic
 
   belongs_to :shopper
   embeds_many :line_items
 
-  def self.create_from_basket(basket)
-    order = self.new
-
+  def populate_from_basket(basket)
     # Create a line item for each unique product in the basket
     # Increase the line item quantity for duplicate products
     grouped_items = basket.items.group_by{|i| i.product.id.to_s }
@@ -15,10 +14,10 @@ class Order
       item = items.first
       product = item.product
       line_item = LineItem.create_from_product(product, items.count)
-      order.line_items << line_item
+      line_items << line_item
     end
 
-    order
+    self
   end
 
   def total
