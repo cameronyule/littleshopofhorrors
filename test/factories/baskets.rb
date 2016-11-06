@@ -1,5 +1,7 @@
 FactoryGirl.define do
   factory :basket do
-    products { [build(:product), build(:product)] }
+    factory :basket_with_products do
+      products { [build(:product), build(:product)] }
+    end
   end
 end
