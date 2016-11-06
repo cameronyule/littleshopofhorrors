@@ -41,13 +41,8 @@ class BasketFlowTest < ActionDispatch::IntegrationTest
     shopper_json = JSON.parse(@response.body)
     shopper = Shopper.new(shopper_json)
 
-    # Remove one of the existing products from our basket
-    products = []
-    products << shopper.basket.items.first.product
-    # Create one new product which we'll add to our basket
-    products << create(:product)
-
-    # Conver the BSON::ObjectId instances to strings
+    # Create some products to work with
+    products = FactoryGirl.create_list(:product, 3)
     product_ids = products.map{|p| p.id.to_s}
 
     # Update the basket
