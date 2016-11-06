@@ -1,12 +1,12 @@
 class ShoppersController < ApplicationController
   before_action :set_shopper, only: [:show, :update, :destroy]
 
-  # GET /shoppers/1
+  # GET /api/shoppers/1
   def show
     render json: @shopper
   end
 
-  # POST /shoppers
+  # POST /api/shoppers
   def create
     @shopper = Shopper.new(shopper_params)
 
@@ -17,7 +17,7 @@ class ShoppersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /shoppers/1
+  # PATCH/PUT /api/shoppers/1
   def update
     if @shopper.update(shopper_params)
       render json: @shopper
@@ -26,7 +26,7 @@ class ShoppersController < ApplicationController
     end
   end
 
-  # DELETE /shoppers/1
+  # DELETE /api/shoppers/1
   def destroy
     @shopper.destroy
   end

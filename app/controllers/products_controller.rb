@@ -1,19 +1,19 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :update, :destroy]
 
-  # GET /products
+  # GET /api/products
   def index
     @products = Product.all
 
     render json: @products
   end
 
-  # GET /products/1
+  # GET /api/products/1
   def show
     render json: @product
   end
 
-  # POST /products
+  # POST /api/products
   def create
     @product = Product.new(product_params)
 
@@ -24,7 +24,7 @@ class ProductsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /products/1
+  # PATCH/PUT /api/products/1
   def update
     if @product.update(product_params)
       render json: @product
@@ -33,7 +33,7 @@ class ProductsController < ApplicationController
     end
   end
 
-  # DELETE /products/1
+  # DELETE /api/products/1
   def destroy
     @product.destroy
   end
