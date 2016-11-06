@@ -1,3 +1,4 @@
 class ShopperSerializer < ActiveModel::Serializer
-  attributes :id, :name, :email, :basket
+  attributes :id, :name, :email
+  has_one :basket
 end
