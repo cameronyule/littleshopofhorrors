@@ -21,19 +21,11 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     get products_url, as: :json
 
     products = JSON.parse @response.body
+    products = products.map{|p| Product.new(p.except("display_price")) }
 
-    assert_equal @product.name, products.first["name"]
-    assert_equal @product.description, products.first["description"]
-    assert_equal @product.price, products.first["price"]
-  end
-
-  test "should return id as a string" do
-    get products_url, as: :json
-
-    products = JSON.parse @response.body
-
-    assert_equal "application/json", @response.content_type
-    assert_kind_of String, products.first["id"]
+    assert_equal @product.name, products.first.name
+    assert_equal @product.description, products.first.description
+    assert_equal @product.price, products.first.price
   end
 
   test "should create product" do

@@ -36,11 +36,12 @@ class ShoppersControllerTest < ActionDispatch::IntegrationTest
       }
     }, as: :json
 
-    json = JSON.parse(@response.body)
+    shopper_json = JSON.parse(@response.body)
+    shopper = Shopper.new(shopper_json)
 
-    assert_equal @shopper.name, json["name"]
-    assert_equal @shopper.email, json["email"]
-    assert_not_nil json["basket"]
+    assert_equal @shopper.name, shopper.name
+    assert_equal @shopper.email, shopper.email
+    assert_not_nil shopper.basket
   end
 
   test "should show shopper" do

@@ -17,10 +17,11 @@ class BasketsControllerTest < ActionDispatch::IntegrationTest
     get shopper_basket_url :shopper_id => @shopper.id.to_s, as: :json
     assert_response :success
 
-    json = JSON.parse(@response.body)
+    basket_json = JSON.parse(@response.body)
+    basket = Basket.new(basket_json)
 
-    assert_equal @shopper.basket.id.to_s, json["id"]
-    assert_equal @shopper.basket.products.count, json["products"].count
+    assert_equal @shopper.basket.id.to_s, basket.id.to_s
+    assert_equal @shopper.basket.products.count, basket.products.count
   end
 
   test "should update basket" do
