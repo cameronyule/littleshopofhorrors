@@ -17,7 +17,8 @@ class OrderTest < ActiveSupport::TestCase
     item2 = build(:basket_item, product: create(:product))
     basket.items = [item1, item1, item2]
 
-    order = Order.create_from_basket(basket)
+    order = Order.new
+    order.populate_from_basket(basket)
 
     assert_equal 2, order.line_items.size
     assert_equal 2, order.line_items[0].quantity

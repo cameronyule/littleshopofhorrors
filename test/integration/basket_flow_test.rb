@@ -32,7 +32,7 @@ class BasketFlowTest < ActionDispatch::IntegrationTest
   test "update an existing user's basket" do
     # Ensure we have a shopper who has a basket with products
     # already persisted in the database
-    existing_shopper = create(:shopper, basket: build(:basket_with_items))
+    existing_shopper = create(:shopper_with_items)
 
     # Find our existing shopper
     get shopper_url(existing_shopper.id), as: :json
