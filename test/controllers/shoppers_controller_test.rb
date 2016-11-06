@@ -23,7 +23,7 @@ class ShoppersControllerTest < ActionDispatch::IntegrationTest
         }
       }, as: :json
     end
-    assert_response 201
+    assert_response :created
   end
 
   test "should return a JSON serialised instance of the shopper" do
@@ -55,13 +55,13 @@ class ShoppersControllerTest < ActionDispatch::IntegrationTest
         name: @shopper.name
       }
     }, as: :json
-    assert_response 200
+    assert_response :ok
   end
 
   test "should destroy shopper" do
     assert_difference('Shopper.count', -1) do
       delete shopper_url(@shopper), as: :json
     end
-    assert_response 204
+    assert_response :no_content
   end
 end

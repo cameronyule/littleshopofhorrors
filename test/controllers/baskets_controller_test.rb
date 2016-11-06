@@ -30,13 +30,13 @@ class BasketsControllerTest < ActionDispatch::IntegrationTest
 
     @shopper.basket.reload
 
-    assert_response 200
+    assert_response :ok
     assert_equal 2, @shopper.basket.products.count
   end
 
   test "should empty basket products" do
     delete shopper_basket_url shopper_id: @shopper.id.to_s, as: :json
-    assert_response 204
+    assert_response :no_content
 
     @shopper.reload
 
