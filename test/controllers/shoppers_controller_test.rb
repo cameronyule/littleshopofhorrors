@@ -5,11 +5,6 @@ class ShoppersControllerTest < ActionDispatch::IntegrationTest
     @shopper = create(:shopper)
   end
 
-  # test "should get index" do
-  #   get shoppers_url, as: :json
-  #   assert_response :success
-  # end
-
   test "should create shopper" do
     @shopper = build(:shopper)
     assert_difference('Shopper.count') do
