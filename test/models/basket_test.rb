@@ -15,4 +15,15 @@ class BasketTest < ActiveSupport::TestCase
     assert_equal 3, basket.items.size
   end
 
+  test "should allow us to update the current items" do
+    basket = build(:basket)
+
+    products = FactoryGirl.create_list(:product, 3)
+    product_ids = products.map{|p| p.id.to_s}
+
+    basket.update_items(product_ids)
+
+    assert_equal basket.items.size, products.count
+  end
+
 end

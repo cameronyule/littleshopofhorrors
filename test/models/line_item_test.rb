@@ -13,6 +13,7 @@ class LineItemTest < ActiveSupport::TestCase
     product = build(:product)
     line_item = LineItem.create_from_product(product)
 
+    assert_equal product.id, line_item.product.id
     assert_equal product.price, line_item.cost
   end
 
