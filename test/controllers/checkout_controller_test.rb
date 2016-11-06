@@ -32,4 +32,17 @@ class CheckoutControllerTest < ActionDispatch::IntegrationTest
     assert_equal 2, order_json["total"]
   end
 
+  test "should empty the basket after a successful checkout" do
+    @shopper = create(:shopper_with_items)
+
+    post shopper_checkout_url(@shopper), params: {}, as: :json
+
+    order_json = JSON.parse(@response.body)
+
+    @shopper.reload
+
+    assert_response :created
+    assert_empty @shopper.basket.items
+  end
+
 end

@@ -8,18 +8,18 @@ class BasketsController < ApplicationController
 
   # PATCH/PUT /api/shoppers/:id/basket
   def update
-    @shopper.basket.update_items(params[:product_ids])
-
-    if @shopper.save
+    begin
+      @shopper.basket.update_items(params[:product_ids])
       render json: @shopper.basket
-    else
-      render json: @shopper.basket.errors, status: :unprocessable_entity
+    rescue Mongoid::Errors::DocumentNotFound
+      render json: {errors: "One or more product IDs were not recognised"},
+        status: :unprocessable_entity
     end
   end
 
   # DELETE /api/shoppers/:id/basket
   def destroy
-    @shopper.basket.items.clear
+    @shopper.basket.empty_items
   end
 
   private
