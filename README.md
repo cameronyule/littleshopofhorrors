@@ -62,13 +62,19 @@ requirement to ensure that it's encrypted at rest.
 
 ### Docker
 
+```bash
+RAILS_ENV=development docker-compose build
+RAILS_ENV=development docker-compose run app bin/rails db:seed
+RAILS_ENV=development docker-compose up -d
+```
 
+The app should now be visible on your host at http://127.0.0.1:3000
 
 ### Manual
 
 1. Install [MongoDB](https://docs.mongodb.com/manual/installation/) on your
 system and amend `config/mongoid.yml` to match the connection details of your
-install.
+install (particularly hostname, which is currently set for Docker).
 
 2. Install [Ruby](https://www.ruby-lang.org/en/documentation/installation/)
 2.3.0 or later on your system.
